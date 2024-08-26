@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment questions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Assessment Parts</h2>
+            <ul>
+                <li onclick="showPart(1)">Part 1</li>
+                <li onclick="showPart(2)">Part 2</li>
+                <li onclick="showPart(3)">Part 3</li>
+            </ul>
+            <button onclick="toggleDrawBoard()">Draw Board</button>
+            <button onclick="toggleCalculator()">Calculator</button>
+        </div>
+
+        <div class="content">
+            <div id="liveCam" class="live-cam">
+                <video id="video" autoplay></video>
+            </div>
+
+            <div id="part1" class="assessment-part">
+                <h2>Part 1</h2>
+                <form id="part1Form" class="question-form">
+                    <div class="question">
+                        <p>Question 1: What is 2 + 2?</p>
+                        <label><input type="radio" name="q1" value="4"> 4</label>
+                        <label><input type="radio" name="q1" value="5"> 5</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 2: What is the capital of France?</p>
+                        <label><input type="radio" name="q2" value="Paris"> Paris</label>
+                        <label><input type="radio" name="q2" value="London"> London</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 3: What color is the sky?</p>
+                        <label><input type="radio" name="q3" value="Blue"> Blue</label>
+                        <label><input type="radio" name="q3" value="Green"> Green</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 4: What is 5 * 5?</p>
+                        <label><input type="radio" name="q4" value="25"> 25</label>
+                        <label><input type="radio" name="q4" value="30"> 30</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 5: What is the boiling point of water?</p>
+                        <label><input type="radio" name="q5" value="100"> 100°C</label>
+                        <label><input type="radio" name="q5" value="0"> 0°C</label>
+                    </div>
+                </form>
+            </div>
+
+            <div id="part2" class="assessment-part hidden">
+                <h2>Part 2</h2>
+                <form id="part2Form" class="question-form">
+                    <div class="question">
+                        <p>Question 1: What is the chemical symbol for water?</p>
+                        <label><input type="radio" name="q1" value="H2O"> H2O</label>
+                        <label><input type="radio" name="q1" value="O2"> O2</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 2: What is 10 / 2?</p>
+                        <label><input type="radio" name="q2" value="5"> 5</label>
+                        <label><input type="radio" name="q2" value="4"> 4</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 3: Which planet is known as the Red Planet?</p>
+                        <label><input type="radio" name="q3" value="Mars"> Mars</label>
+                        <label><input type="radio" name="q3" value="Venus"> Venus</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 4: Who wrote 'To Kill a Mockingbird'?</p>
+                        <label><input type="radio" name="q4" value="Harper Lee"> Harper Lee</label>
+                        <label><input type="radio" name="q4" value="J.K. Rowling"> J.K. Rowling</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 5: What is the largest ocean on Earth?</p>
+                        <label><input type="radio" name="q5" value="Pacific"> Pacific</label>
+                        <label><input type="radio" name="q5" value="Atlantic"> Atlantic</label>
+                    </div>
+                </form>
+            </div>
+
+            <div id="part3" class="assessment-part hidden">
+                <h2>Part 3</h2>
+                <form id="part3Form" class="question-form">
+                    <div class="question">
+                        <p>Question 1: Who painted the Mona Lisa?</p>
+                        <label><input type="radio" name="q1" value="Leonardo da Vinci"> Leonardo da Vinci</label>
+                        <label><input type="radio" name="q1" value="Vincent van Gogh"> Vincent van Gogh</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 2: What is the powerhouse of the cell?</p>
+                        <label><input type="radio" name="q2" value="Mitochondria"> Mitochondria</label>
+                        <label><input type="radio" name="q2" value="Nucleus"> Nucleus</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 3: What is the square root of 64?</p>
+                        <label><input type="radio" name="q3" value="8"> 8</label>
+                        <label><input type="radio" name="q3" value="6"> 6</label>
+                    </div>
+                    <div class="question">
+                        <p>Question 4: What year did the Titanic sink?</p>
+                        <label><input type="radio" name="q4" value="1912"> 1912</label>
+                        <label><input type="radio" name="q4" value="1905"> 1905</label>
+                    </div>
+                    <div class="question">
+                        <p>What is the capital of Japan?</p>
+                        <label><input type="radio" name="q5" value="Tokyo"> Tokyo</label>
+                        <label><input type="radio" name="q5" value="Beijing"> Beijing</label>
+                    </div>
+                </form>
+            </div>
+
+            <button onclick="calculateResult()" class="submit-button">Submit Assessment</button>
+        </div>
+
+        <div id="drawBoard" class="floating-board hidden">
+            <canvas id="canvas" width="300" height="300"></canvas>
+            <button onclick="clearCanvas()">Clear</button>
+        </div>
+
+        <div id="calculator" class="floating-calculator hidden">
+            <input type="text" id="calcInput" readonly>
+            <div class="buttons">
+                <button onclick="appendNumber('1')">1</button>
+                <button onclick="appendNumber('2')">2</button>
+                <button onclick="appendNumber('3')">3</button>
+                <button onclick="appendNumber('+')">+</button>
+                <button onclick="appendNumber('4')">4</button>
+                <button onclick="appendNumber('5')">5</button>
+                <button onclick="appendNumber('6')">6</button>
+                <button onclick="appendNumber('-')">-</button>
+                <button onclick="appendNumber('7')">7</button>
+                <button onclick="appendNumber('8')">8</button>
+                <button onclick="appendNumber('9')">9</button>
+                <button onclick="appendNumber('*')">*</button>
+                <button onclick="appendNumber('0')">0</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="clearCalc()">C</button>
+                <button onclick="appendNumber('/')">/</button>
+            </div>
+        </div>
+
+        <div id="footer" class="footer">
+            <p id="warningMessage">Warning: Face not detected or noise too loud!</p>
+        </div>
+    </div>
+
+    <div id="resultModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="resultMessage"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
